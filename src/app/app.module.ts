@@ -3,14 +3,19 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
+import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
+import { EventsComponent } from './events/events.component';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    EventsComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AmplifyAngularModule
   ],
-  providers: [],
+  providers: [AmplifyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,7 @@
+{
+    "tableName": "dynamodito",
+    "partitionKeyName": "id",
+    "partitionKeyType": "N",
+    "sortKeyName": "timestamp",
+    "sortKeyType": "S"
+}

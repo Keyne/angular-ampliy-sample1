@@ -1,0 +1,14 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "desafrio-dito-20190317105338-authRole",
+            "UnauthRoleArn": "arn:aws:iam::322085146600:role/desafrio-dito-20190317105338-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::322085146600:role/desafrio-dito-20190317105338-authRole",
+            "Region": "eu-west-1",
+            "DeploymentBucketName": "desafrio-dito-20190317105338-deployment",
+            "UnauthRoleName": "desafrio-dito-20190317105338-unauthRole",
+            "StackName": "desafrio-dito-20190317105338",
+            "StackId": "arn:aws:cloudformation:eu-west-1:322085146600:stack/desafrio-dito-20190317105338/131eade0-48bc-11e9-869e-0212c97b1f72"
+        }
+    }
+}

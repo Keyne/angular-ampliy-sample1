@@ -1,0 +1,34 @@
+{
+    "paths": [
+        {
+            "name": "/events",
+            "lambdaFunction": "desafriodito11814c71",
+            "privacy": {
+                "open": true
+            }
+        }
+    ],
+    "resourceName": "apidito",
+    "apiName": "apidito",
+    "functionArns": [
+        {
+            "lambdaFunction": "desafriodito11814c71"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "desafrio-dito-20190317105338-authRole",
+        "unAuthRoleName": "desafrio-dito-20190317105338-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "desafriodito11814c71",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}
