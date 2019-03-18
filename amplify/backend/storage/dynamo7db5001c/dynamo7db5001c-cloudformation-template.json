@@ -40,12 +40,12 @@
                 "AttributeDefinitions": [
                   
                   {
-                      "AttributeName": "id",
-                      "AttributeType": "N"
+                      "AttributeName": "timestamp",
+                      "AttributeType": "S"
                   }  , 
                   
                   {
-                      "AttributeName": "timestamp",
+                      "AttributeName": "event",
                       "AttributeType": "S"
                   } 
                   
@@ -53,12 +53,12 @@
                 "KeySchema": [
                   
                   {
-                    "AttributeName": "id",
+                    "AttributeName": "timestamp",
                     "KeyType": "HASH"
                   }  , 
                   
                   {
-                    "AttributeName": "timestamp",
+                    "AttributeName": "event",
                     "KeyType": "RANGE"
                   } 
                   

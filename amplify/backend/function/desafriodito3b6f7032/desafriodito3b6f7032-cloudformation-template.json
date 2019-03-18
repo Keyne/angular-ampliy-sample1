@@ -5,13 +5,13 @@
 		"env": {
 			"Type": "String"
 		},
-		"storagedynamoditoName": {
+		"storagedynamo7db5001cName": {
 			"Type": "String",
-			"Default": "storagedynamoditoName"
+			"Default": "storagedynamo7db5001cName"
 		},
-		"storagedynamoditoArn": {
+		"storagedynamo7db5001cArn": {
 			"Type": "String",
-			"Default": "storagedynamoditoArn"
+			"Default": "storagedynamo7db5001cArn"
 		}
 	},
 	"Conditions": {
@@ -36,12 +36,12 @@
 				"FunctionName": {
 					"Fn::If": [
 						"ShouldNotCreateEnvResources",
-						"desafriodito11814c71",
+						"desafriodito3b6f7032",
 						{
 							"Fn::Join": [
 								"",
 								[
-									"desafriodito11814c71",
+									"desafriodito3b6f7032",
 									"-",
 									{
 										"Ref": "env"
@@ -67,8 +67,8 @@
 				"Runtime": "nodejs8.10",
 				"Timeout": "25",
 				"Code": {
-					"S3Bucket": "desafrio-dito-20190317105338-deployment",
-					"S3Key": "amplify-builds/desafriodito11814c71-1552833679-latest-build.zip"
+					"S3Bucket": "desafrio-dito-20190317210425-deployment",
+					"S3Key": "amplify-builds/desafriodito3b6f7032-1552869487-latest-build.zip"
 				}
 			}
 		},
@@ -78,12 +78,12 @@
 				"RoleName": {
 					"Fn::If": [
 						"ShouldNotCreateEnvResources",
-						"desafrioditoLambdaRole560e35e8",
+						"desafrioditoLambdaRoleb5cbe3d2",
 						{
 							"Fn::Join": [
 								"",
 								[
-									"desafrioditoLambdaRole560e35e8",
+									"desafrioditoLambdaRoleb5cbe3d2",
 									"-",
 									{
 										"Ref": "env"
@@ -162,7 +162,7 @@
 							],
 							"Resource": [
 								{
-									"Ref": "storagedynamoditoArn"
+									"Ref": "storagedynamo7db5001cArn"
 								}
 							]
 						}

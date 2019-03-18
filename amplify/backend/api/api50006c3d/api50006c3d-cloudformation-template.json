@@ -15,15 +15,15 @@
         },
     
     
-          "functiondesafriodito11814c71Name": {
+          "functiondesafriodito3b6f7032Name": {
             "Type": "String",
-            "Default": "functiondesafriodito11814c71Name"
+            "Default": "functiondesafriodito3b6f7032Name"
           },
         
           
-          "functiondesafriodito11814c71Arn": {
+          "functiondesafriodito3b6f7032Arn": {
             "Type": "String",
-            "Default": "functiondesafriodito11814c71Arn"
+            "Default": "functiondesafriodito3b6f7032Arn"
           }
         
           
@@ -43,16 +43,16 @@
     "Resources": {
         
         
-      "apidito": {
+      "api50006c3d": {
         "Type": "AWS::ApiGateway::RestApi",
         "Properties": {
           "Description": "",
-          "Name": "apidito",
+          "Name": "api50006c3d",
           "Body": {
             "swagger": "2.0",
             "info": {
               "version": "2018-05-24T17:52:00Z",
-              "title": "apidito"
+              "title": "api50006c3d"
             },
             "host": {
                 "Fn::Join": [
@@ -174,7 +174,7 @@
                             
                             {
                                 
-                                "Ref": "functiondesafriodito11814c71Arn"
+                                "Ref": "functiondesafriodito3b6f7032Arn"
                             },
                             
                             "/invocations"
@@ -273,7 +273,7 @@
                           
                           {
                             
-                            "Ref": "functiondesafriodito11814c71Arn"
+                            "Ref": "functiondesafriodito3b6f7032Arn"
                           },
                           
                           "/invocations"
@@ -330,12 +330,12 @@
                   
         
         
-        "functiondesafriodito11814c71Permissionapidito": {
+        "functiondesafriodito3b6f7032Permissionapi50006c3d": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
                 "FunctionName": 
                     {
-                        "Ref":  "functiondesafriodito11814c71Name"
+                        "Ref":  "functiondesafriodito3b6f7032Name"
                     },
                     
                     "Action": "lambda:InvokeFunction",
@@ -354,7 +354,7 @@
                             },
                             ":",
                             {
-                                "Ref": "apidito"
+                                "Ref": "api50006c3d"
                             },
                             "/*/*/*"
                         ]
@@ -365,7 +365,7 @@
         
         
         
-      "DeploymentAPIGWapidito": {
+      "DeploymentAPIGWapi50006c3d": {
         "Type": "AWS::ApiGateway::Deployment",
         "Properties": {
           "Description": "The Development stage deployment of your API.",
@@ -379,7 +379,7 @@
             ]
           },
           "RestApiId": {
-            "Ref": "apidito"
+            "Ref": "api50006c3d"
           }
         }
       }
@@ -387,11 +387,11 @@
     "Outputs": {
         "RootUrl": {
             "Description": "Root URL of the API gateway",
-            "Value": {"Fn::Join": ["", ["https://", {"Ref": "apidito"}, ".execute-api.", {"Ref": "AWS::Region"}, ".amazonaws.com/", {"Fn::If": ["ShouldNotCreateEnvResources","Prod", {"Ref": "env"} ]}]]}
+            "Value": {"Fn::Join": ["", ["https://", {"Ref": "api50006c3d"}, ".execute-api.", {"Ref": "AWS::Region"}, ".amazonaws.com/", {"Fn::If": ["ShouldNotCreateEnvResources","Prod", {"Ref": "env"} ]}]]}
         },
         "ApiName": {
           "Description": "API Friendly name",
-          "Value": "apidito"
+          "Value": "api50006c3d"
         }
     }
   }

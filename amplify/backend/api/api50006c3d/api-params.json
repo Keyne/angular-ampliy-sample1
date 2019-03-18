@@ -2,29 +2,29 @@
     "paths": [
         {
             "name": "/events",
-            "lambdaFunction": "desafriodito11814c71",
+            "lambdaFunction": "desafriodito3b6f7032",
             "privacy": {
                 "open": true
             }
         }
     ],
-    "resourceName": "apidito",
-    "apiName": "apidito",
+    "resourceName": "api50006c3d",
+    "apiName": "api50006c3d",
     "functionArns": [
         {
-            "lambdaFunction": "desafriodito11814c71"
+            "lambdaFunction": "desafriodito3b6f7032"
         }
     ],
     "privacy": {
         "auth": 0,
         "unauth": 0,
-        "authRoleName": "desafrio-dito-20190317105338-authRole",
-        "unAuthRoleName": "desafrio-dito-20190317105338-unauthRole"
+        "authRoleName": "desafrio-dito-20190317210425-authRole",
+        "unAuthRoleName": "desafrio-dito-20190317210425-unauthRole"
     },
     "dependsOn": [
         {
             "category": "function",
-            "resourceName": "desafriodito11814c71",
+            "resourceName": "desafriodito3b6f7032",
             "attributes": [
                 "Name",
                 "Arn"

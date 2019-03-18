@@ -1,19 +1,19 @@
 {
 	"storage": {
-		"dynamodito": {
+		"dynamo7db5001c": {
 			"service": "DynamoDB",
 			"providerPlugin": "awscloudformation"
 		}
 	},
 	"function": {
-		"desafriodito11814c71": {
+		"desafriodito3b6f7032": {
 			"service": "Lambda",
 			"providerPlugin": "awscloudformation",
 			"build": true,
 			"dependsOn": [
 				{
 					"category": "storage",
-					"resourceName": "dynamodito",
+					"resourceName": "dynamo7db5001c",
 					"attributes": [
 						"Name",
 						"Arn"
@@ -23,13 +23,13 @@
 		}
 	},
 	"api": {
-		"apidito": {
+		"api50006c3d": {
 			"service": "API Gateway",
 			"providerPlugin": "awscloudformation",
 			"dependsOn": [
 				{
 					"category": "function",
-					"resourceName": "desafriodito11814c71",
+					"resourceName": "desafriodito3b6f7032",
 					"attributes": [
 						"Name",
 						"Arn"

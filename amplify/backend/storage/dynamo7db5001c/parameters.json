@@ -1,0 +1,7 @@
+{
+    "tableName": "dynamo7db5001c",
+    "partitionKeyName": "timestamp",
+    "partitionKeyType": "S",
+    "sortKeyName": "event",
+    "sortKeyType": "S"
+}

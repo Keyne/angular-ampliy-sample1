@@ -14,15 +14,15 @@ AWS.config.update({ region: process.env.TABLE_REGION });
 
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 
-let tableName = "dynamodito";
+let tableName = "dynamo7db5001c";
 if(process.env.ENV && process.env.ENV !== "NONE") {
   tableName = tableName + '-' + process.env.ENV;
 }
 
 const userIdPresent = false; // TODO: update in case is required to use that definition
-const partitionKeyName = "id";
-const partitionKeyType = "N";
-const sortKeyName = "timestamp";
+const partitionKeyName = "timestamp";
+const partitionKeyType = "S";
+const sortKeyName = "event";
 const sortKeyType = "S";
 const hasSortKey = sortKeyName !== "";
 const path = "/events";
@@ -77,6 +77,36 @@ app.get(path + hashKeyPath, function(req, res) {
   } 
 
   dynamodb.query(queryParams, (err, data) => {
+    if (err) {
+      res.json({error: 'Could not load items: ' + err});
+    } else {
+      res.json(data.Items);
+    }
+  });
+});
+
+app.get(path, function(req, res) {
+  var condition = {}
+  condition[partitionKeyName] = {
+    ComparisonOperator: 'EQ'
+  }
+
+  if (userIdPresent && req.apiGateway) {
+    condition[partitionKeyName]['AttributeValueList'] = [req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH ];
+  } else {
+    try {
+      condition[partitionKeyName]['AttributeValueList'] = [ convertUrlType(req.params[partitionKeyName], partitionKeyType) ];
+    } catch(err) {
+      res.json({error: 'Wrong column type ' + err});
+    }
+  }
+
+  let queryParams = {
+    TableName: tableName
+    // KeyConditions: condition
+  }
+
+  dynamodb.scan(queryParams, (err, data) => {
     if (err) {
       res.json({error: 'Could not load items: ' + err});
     } else {
