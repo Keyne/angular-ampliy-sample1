@@ -1,19 +1,19 @@
 {
 	"storage": {
-		"dynamo7db5001c": {
+		"dynamo30399a90": {
 			"service": "DynamoDB",
 			"providerPlugin": "awscloudformation"
 		}
 	},
 	"function": {
-		"desafriodito3b6f7032": {
+		"desafrioditoeecf2b00": {
 			"service": "Lambda",
 			"providerPlugin": "awscloudformation",
 			"build": true,
 			"dependsOn": [
 				{
 					"category": "storage",
-					"resourceName": "dynamo7db5001c",
+					"resourceName": "dynamo30399a90",
 					"attributes": [
 						"Name",
 						"Arn"
@@ -23,13 +23,13 @@
 		}
 	},
 	"api": {
-		"api50006c3d": {
+		"apia3e468c4": {
 			"service": "API Gateway",
 			"providerPlugin": "awscloudformation",
 			"dependsOn": [
 				{
 					"category": "function",
-					"resourceName": "desafriodito3b6f7032",
+					"resourceName": "desafrioditoeecf2b00",
 					"attributes": [
 						"Name",
 						"Arn"

@@ -14,13 +14,13 @@ AWS.config.update({ region: process.env.TABLE_REGION });
 
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 
-let tableName = "dynamo7db5001c";
+let tableName = "dynamo30399a90";
 if(process.env.ENV && process.env.ENV !== "NONE") {
   tableName = tableName + '-' + process.env.ENV;
 }
 
 const userIdPresent = false; // TODO: update in case is required to use that definition
-const partitionKeyName = "timestamp";
+const partitionKeyName = "client_id";
 const partitionKeyType = "S";
 const sortKeyName = "event";
 const sortKeyType = "S";
@@ -55,47 +55,17 @@ const convertUrlType = (param, type) => {
  * HTTP Get method for list objects *
  ********************************/
 
-app.get(path + hashKeyPath, function(req, res) {
-  var condition = {}
-  condition[partitionKeyName] = {
-    ComparisonOperator: 'EQ'
-  }
-  
-  if (userIdPresent && req.apiGateway) {
-    condition[partitionKeyName]['AttributeValueList'] = [req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH ];
-  } else {
-    try {
-      condition[partitionKeyName]['AttributeValueList'] = [ convertUrlType(req.params[partitionKeyName], partitionKeyType) ];
-    } catch(err) {
-      res.json({error: 'Wrong column type ' + err});
-    }
-  }
-
-  let queryParams = {
-    TableName: tableName,
-    KeyConditions: condition
-  } 
-
-  dynamodb.query(queryParams, (err, data) => {
-    if (err) {
-      res.json({error: 'Could not load items: ' + err});
-    } else {
-      res.json(data.Items);
-    }
-  });
-});
-
 app.get(path, function(req, res) {
   var condition = {}
   condition[partitionKeyName] = {
     ComparisonOperator: 'EQ'
-  }
+  };
 
   if (userIdPresent && req.apiGateway) {
-    condition[partitionKeyName]['AttributeValueList'] = [req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH ];
+    condition[partitionKeyName]['AttributeValueList'] = [req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH ]; // jshint ignore:line
   } else {
     try {
-      condition[partitionKeyName]['AttributeValueList'] = [ convertUrlType(req.params[partitionKeyName], partitionKeyType) ];
+      condition[partitionKeyName]['AttributeValueList'] = [ convertUrlType(req.params[partitionKeyName], partitionKeyType) ]; // jshint ignore:line
     } catch(err) {
       res.json({error: 'Wrong column type ' + err});
     }
@@ -103,7 +73,31 @@ app.get(path, function(req, res) {
 
   let queryParams = {
     TableName: tableName
-    // KeyConditions: condition
+  };
+
+  if(req.param('q')) {
+    // queryParams.IndexName = 'dito_time_idx';
+    queryParams.FilterExpression = "begins_with(event, :event)";
+    /*
+    queryParams.ExpressionAttributeNames = {
+      "#event": "event",
+      "#client_id": "client_id",
+    };
+    */
+    queryParams.ExpressionAttributeValues = {
+      ":event": req.param('q')
+      // ":client_id": 1
+    };
+
+    /*
+    dynamodb.query(queryParams, (err, data) => {
+      if (err) {
+        res.json({error: 'Could not load items: ' + err});
+      } else {
+        res.json(data.Items);
+      }
+    });
+    */
   }
 
   dynamodb.scan(queryParams, (err, data) => {
@@ -114,6 +108,7 @@ app.get(path, function(req, res) {
     }
   });
 });
+
 
 /*****************************************
  * HTTP Get method for get single object *

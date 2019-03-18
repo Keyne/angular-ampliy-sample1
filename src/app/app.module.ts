@@ -6,6 +6,13 @@ import { AppComponent } from './app.component';
 import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
 import { EventsComponent } from './events/events.component';
 
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatButtonModule, MatCheckboxModule, MatAutocompleteModule} from '@angular/material';
+
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -13,7 +20,14 @@ import { EventsComponent } from './events/events.component';
   ],
   imports: [
     BrowserModule,
-    AmplifyAngularModule
+    AmplifyAngularModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatAutocompleteModule,
+    HttpClientModule
   ],
   providers: [AmplifyService],
   bootstrap: [AppComponent]

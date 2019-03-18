@@ -1,6 +1,6 @@
 {
-    "tableName": "dynamo7db5001c",
-    "partitionKeyName": "timestamp",
+    "tableName": "dynamo30399a90",
+    "partitionKeyName": "client_id",
     "partitionKeyType": "S",
     "sortKeyName": "event",
     "sortKeyType": "S"

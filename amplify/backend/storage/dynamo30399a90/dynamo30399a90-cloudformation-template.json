@@ -40,12 +40,17 @@
                 "AttributeDefinitions": [
                   
                   {
-                      "AttributeName": "timestamp",
+                      "AttributeName": "client_id",
                       "AttributeType": "S"
                   }  , 
                   
                   {
                       "AttributeName": "event",
+                      "AttributeType": "S"
+                  }  , 
+                  
+                  {
+                      "AttributeName": "timestamp",
                       "AttributeType": "S"
                   } 
                   
@@ -53,7 +58,7 @@
                 "KeySchema": [
                   
                   {
-                    "AttributeName": "timestamp",
+                    "AttributeName": "client_id",
                     "KeyType": "HASH"
                   }  , 
                   
@@ -90,6 +95,34 @@
                         },       
                     ]
                 }
+                
+                ,"GlobalSecondaryIndexes": [
+                  
+                    {
+                        "IndexName": "timestamp",
+                        "KeySchema": [
+                            
+                            {
+                                "AttributeName": "timestamp",
+                                "KeyType": "HASH"
+                            }  , 
+                            
+                            {
+                                "AttributeName": "event",
+                                "KeyType": "RANGE"
+                            } 
+                            
+                        ],
+                        "Projection": {
+                            "ProjectionType": "ALL"
+                        },
+                        "ProvisionedThroughput": {
+                            "ReadCapacityUnits": "5",
+                            "WriteCapacityUnits": "5"
+                        }
+                    } 
+                  
+                ]
                 
             }
         }

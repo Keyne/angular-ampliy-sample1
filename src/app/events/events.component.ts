@@ -1,6 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { AmplifyService } from 'aws-amplify-angular';
+// import { AmplifyService } from 'aws-amplify-angular';
+import { FormControl } from '@angular/forms';
+import {
+  startWith,
+  map,
+  debounceTime,
+  switchMap,
+  catchError
+} from 'rxjs/operators';
+import { Observable, of, throwError } from 'rxjs';
+
 import awsconfig from '../../aws-exports';
+
+import { Event } from './event.model';
+import { EventsService } from '../events.service';
+
 
 @Component({
   selector: 'app-events',
@@ -9,24 +23,45 @@ import awsconfig from '../../aws-exports';
 })
 export class EventsComponent implements OnInit {
 
-  constructor(private amplifyService: AmplifyService) { }
+  constructor(private eventsService: EventsService) { }
+
+  myControl = new FormControl();
+
+  options: Event[] = [];
+  filteredOptions: Observable<Event[]>;
+
+  static displayFn(event?: any): string | undefined {
+    console.log(event);
+    return event ? event.body[0].event : of(null);
+  }
 
   ngOnInit() {
-
-      const apiName = awsconfig.aws_cloud_logic_custom[0].name;
-      const path = '/events';
-      const myInit = { // OPTIONAL
-          headers: {}, // OPTIONAL
-          response: true, // OPTIONAL (return the entire Axios response object instead of only response.data)
-          queryStringParameters: {  // OPTIONAL
-
-          }
-      }
-      this.amplifyService.api().get(apiName, path, myInit).then(response => {
-          console.log(response);
-      }).catch(error => {
-          console.log(error.response);
-      });
+      this.filteredOptions = this.myControl.valueChanges
+        .pipe(
+          startWith<string | Event>(''),
+          debounceTime(300),
+          switchMap(value => {
+            if ((value as any).length  >= 2) {
+              return this.lookup(value.toString());
+            } else {
+              return of(null);
+            }
+          })
+        );
   }
+
+  lookup(value: string): Observable<Event> {
+    return this.eventsService.search(value.toLowerCase()).pipe(
+      map(results => {
+        console.log(results);
+        return results;
+      }),
+      // catch errors
+      catchError(error => {
+        return throwError(error);
+      })
+    );
+  }
+
 
 }

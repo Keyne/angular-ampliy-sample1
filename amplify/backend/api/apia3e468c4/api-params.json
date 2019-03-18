@@ -2,29 +2,29 @@
     "paths": [
         {
             "name": "/events",
-            "lambdaFunction": "desafriodito3b6f7032",
+            "lambdaFunction": "desafrioditoeecf2b00",
             "privacy": {
                 "open": true
             }
         }
     ],
-    "resourceName": "api50006c3d",
-    "apiName": "api50006c3d",
+    "resourceName": "apia3e468c4",
+    "apiName": "apia3e468c4",
     "functionArns": [
         {
-            "lambdaFunction": "desafriodito3b6f7032"
+            "lambdaFunction": "desafrioditoeecf2b00"
         }
     ],
     "privacy": {
         "auth": 0,
         "unauth": 0,
-        "authRoleName": "desafrio-dito-20190317210425-authRole",
-        "unAuthRoleName": "desafrio-dito-20190317210425-unauthRole"
+        "authRoleName": "desafrio-dito-20190318070342-authRole",
+        "unAuthRoleName": "desafrio-dito-20190318070342-unauthRole"
     },
     "dependsOn": [
         {
             "category": "function",
-            "resourceName": "desafriodito3b6f7032",
+            "resourceName": "desafrioditoeecf2b00",
             "attributes": [
                 "Name",
                 "Arn"
